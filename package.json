@@ -1,0 +1,17 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "* `npm i` * `npm run serve`",
+  "scripts": {
+    "serve": "node server.js"
+  },
+  "author": "David Whitely",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "graphql": "^14.0.2",
+    "mongoose": "^5.2.14"
+  }
+}
