@@ -12,8 +12,6 @@ const {
 
 const app = express();
 
-console.log(mAUTHUSER);
-
 var basic = auth.basic({
     realm: "Welcome User"
   }, (username, password, callback) => {
@@ -25,7 +23,6 @@ var basic = auth.basic({
 
 app.use(auth.connect(basic));
 
-// app.use('/graphql', staticUserAuth, expressGraphQL({
 app.use('/graphql', expressGraphQL({
   schema: schema,
   graphiql: true
