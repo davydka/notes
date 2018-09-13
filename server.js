@@ -13,7 +13,7 @@ const {
 const app = express();
 
 var basic = auth.basic({
-    realm: "Welcome User"
+    realm: "Can you handle notes?"
   }, (username, password, callback) => {
     // Custom authentication
     // Use callback(error) if you want to throw async error.
@@ -29,6 +29,7 @@ app.use('/graphql', expressGraphQL({
 }));
 
 app.listen(mSERVERPORT, () => {
-  console.log('listening');
+  console.log(`listening on port: ${mSERVERPORT}`);
+  console.log(`GraphiQL available at http://<host>:${mSERVERPORT}\\graphql`);
 });
 
