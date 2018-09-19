@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const expressGraphQL = require('express-graphql');
-const auth = require('http-auth');
+const httpAuth = require('http-auth');
 const schema = require('./schema');
 
 const {
@@ -12,7 +12,7 @@ const {
 
 const app = express();
 
-var basic = auth.basic({
+const basic = httpAuth.basic({
     realm: "Can you handle notes?"
   }, (username, password, callback) => {
     // Custom authentication
@@ -21,7 +21,7 @@ var basic = auth.basic({
   }
 );
 
-app.use(auth.connect(basic));
+app.use(httpAuth.connect(basic));
 
 app.use('/graphql', expressGraphQL({
   schema: schema,

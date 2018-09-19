@@ -147,17 +147,17 @@ const mutation = new GraphQLObjectType({
         title: { type: GraphQLString },
         content: { type: GraphQLString },
       },
-      resolve(parentValue, args) {
+      resolve(parentValue, { id, title, content }) {
         return new Promise((resolve, reject) => {
-          Note.findOne({ _id: args.id }, function (err, note) {
+          Note.findOne({ _id: id }, function (err, note) {
             if (err) {
               console.error(err);
               resolve(err);
               return;
             }
             
-            note.title = args.title;
-            note.content = args.content;
+            note.title = title;
+            note.content = content;
             note.save(function (err, updatedNote) {
               if (err) { 
                 console.error(err);
@@ -173,16 +173,24 @@ const mutation = new GraphQLObjectType({
         });
       }
     },
-    /*
     deleteNote: {
       type: NotesType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parentValue, { id }) {
+        return new Promise((resolve, reject) => {
+          Note.deleteOne({ _id: id }, function (err) {
+            if (err) {
+              console.error(err);
+              resolve(err);
+              return;
+            }
+            resolve({ message: `${id} has been deleted.` });
+          });
+        });
       }
     }
-    */
   }
 
 });
